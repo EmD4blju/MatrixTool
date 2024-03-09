@@ -6,6 +6,7 @@
 #Intellj-Idea
 /.idea
 *.iml
+/target
 
 # User-specific files
 *.rsuser
