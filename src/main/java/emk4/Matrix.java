@@ -44,11 +44,7 @@ public class Matrix {
         throw new NotCompatibleSizeException();
     }
     public boolean sameSizeAs(Matrix other){
-        if(this.data.length != other.data.length) return false;
-        for(int i = 0; i < this.data.length; i++){
-            if(this.data[i].length != other.data[i].length) return false;
-        }
-        return true;
+        return this.rowSize == other.rowSize && this.colSize == other.colSize;
     }
     @Override
     public String toString() {

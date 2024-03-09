@@ -13,7 +13,7 @@ public class App
     {
         Matrix matrix1 = Matrix.generate(2, 2);
         Matrix matrix2 = Matrix.generate(2, 2);
-        Matrix matrix3 = Matrix.generate(2, 2);
+        Matrix matrix3 = Matrix.generate(3, 2);
         System.out.println(matrix1);
         System.out.println(matrix2);
         System.out.println(matrix3);
