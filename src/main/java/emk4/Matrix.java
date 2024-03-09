@@ -20,14 +20,28 @@ public class Matrix {
         return new Matrix(generatedData);
     }
     public Matrix add(Matrix other) throws NotCompatibleSizeException {
-        if(!this.sameSizeAs(other)) throw new NotCompatibleSizeException();
-        Matrix output = new Matrix(new Double[this.rowSize][this.colSize]);
-        for(int i = 0; i < output.rowSize; i++){
-            for(int j  = 0; j < output.colSize; j++){
-                output.data[i][j] = this.data[i][j] + other.data[i][j];
+        if(this.sameSizeAs(other)) {
+            Matrix output = new Matrix(new Double[this.rowSize][this.colSize]);
+            for (int i = 0; i < output.rowSize; i++) {
+                for (int j = 0; j < output.colSize; j++) {
+                    output.data[i][j] = this.data[i][j] + other.data[i][j];
+                }
             }
+            return output;
         }
-        return output;
+        throw new NotCompatibleSizeException();
+    }
+    public Matrix subtract(Matrix other) throws NotCompatibleSizeException{
+        if(this.sameSizeAs(other)) {
+            Matrix output = new Matrix(new Double[this.rowSize][this.colSize]);
+            for (int i = 0; i < output.rowSize; i++) {
+                for (int j = 0; j < output.colSize; j++) {
+                    output.data[i][j] = this.data[i][j] - other.data[i][j];
+                }
+            }
+            return output;
+        }
+        throw new NotCompatibleSizeException();
     }
     public boolean sameSizeAs(Matrix other){
         if(this.data.length != other.data.length) return false;
