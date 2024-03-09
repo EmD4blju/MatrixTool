@@ -1,5 +1,7 @@
 package emk4;
 
+import emk4.Exceptions.NotCompatibleSizeException;
+
 /**
  * @author EmDablju
  */

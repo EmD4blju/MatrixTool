@@ -1,5 +1,6 @@
 package emk4;
 
+import emk4.Exceptions.NotCompatibleSizeException;
 public class Matrix {
     private final Double[][] data;
     private final int rowSize;
@@ -18,7 +19,7 @@ public class Matrix {
         }
         return new Matrix(generatedData);
     }
-    public Matrix add(Matrix other) throws NotCompatibleSizeException{
+    public Matrix add(Matrix other) throws NotCompatibleSizeException {
         if(!this.sameSizeAs(other)) throw new NotCompatibleSizeException();
         Matrix output = new Matrix(new Double[this.rowSize][this.colSize]);
         for(int i = 0; i < output.rowSize; i++){
