@@ -1,12 +1,9 @@
 package emk4;
 
 import emk4.Exceptions.NotCompatibleSizeException;
-
 /**
  * @author EmDablju
  */
-
-
 public class App 
 {
     public static void main( String[] args )

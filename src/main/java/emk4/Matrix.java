@@ -20,7 +20,7 @@ public class Matrix {
         return new Matrix(generatedData);
     }
     public Matrix add(Matrix other) throws NotCompatibleSizeException {
-        if(this.sameSizeAs(other)) {
+        if(this.isAddableWith(other)) {
             Matrix output = new Matrix(new Double[this.rowSize][this.colSize]);
             for (int i = 0; i < output.rowSize; i++) {
                 for (int j = 0; j < output.colSize; j++) {
@@ -32,7 +32,7 @@ public class Matrix {
         throw new NotCompatibleSizeException();
     }
     public Matrix subtract(Matrix other) throws NotCompatibleSizeException{
-        if(this.sameSizeAs(other)) {
+        if(this.isAddableWith(other)) {
             Matrix output = new Matrix(new Double[this.rowSize][this.colSize]);
             for (int i = 0; i < output.rowSize; i++) {
                 for (int j = 0; j < output.colSize; j++) {
@@ -43,8 +43,11 @@ public class Matrix {
         }
         throw new NotCompatibleSizeException();
     }
-    public boolean sameSizeAs(Matrix other){
+    public boolean isAddableWith(Matrix other){
         return this.rowSize == other.rowSize && this.colSize == other.colSize;
+    }
+    public boolean isMultiplyableWith(Matrix other){
+        return this.rowSize == other.colSize;
     }
     @Override
     public String toString() {
