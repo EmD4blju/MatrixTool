@@ -2,26 +2,26 @@ package emk4;
 
 import emk4.Exceptions.NotCompatibleSizeException;
 public class Matrix {
-    private final Double[][] data;
+    private final double[][] data;
     private final int rowSize;
     private final int colSize;
-    public Matrix(Double[][] data) {
+    public Matrix(double[][] data) {
         this.data = data;
         this.rowSize = this.data.length;
         this.colSize = this.data[0].length;
     }
     public static Matrix generate(int rowSize, int colSize){
-        Double[][] generatedData = new Double[rowSize][colSize];
+        double[][] generatedData = new double[rowSize][colSize];
         for(int i = 0; i < rowSize; i++){
             for(int j = 0; j < colSize; j++){
-                generatedData[i][j] = (double)(int)(Math.random() * 20);
+                generatedData[i][j] = (int)(Math.random() * 5);
             }
         }
         return new Matrix(generatedData);
     }
     public Matrix add(Matrix other) throws NotCompatibleSizeException {
         if(this.isAddableWith(other)) {
-            Matrix output = new Matrix(new Double[this.rowSize][this.colSize]);
+            Matrix output = new Matrix(new double[this.rowSize][this.colSize]);
             for (int i = 0; i < output.rowSize; i++) {
                 for (int j = 0; j < output.colSize; j++) {
                     output.data[i][j] = this.data[i][j] + other.data[i][j];
@@ -33,7 +33,7 @@ public class Matrix {
     }
     public Matrix subtract(Matrix other) throws NotCompatibleSizeException{
         if(this.isAddableWith(other)) {
-            Matrix output = new Matrix(new Double[this.rowSize][this.colSize]);
+            Matrix output = new Matrix(new double[this.rowSize][this.colSize]);
             for (int i = 0; i < output.rowSize; i++) {
                 for (int j = 0; j < output.colSize; j++) {
                     output.data[i][j] = this.data[i][j] - other.data[i][j];
@@ -43,11 +43,34 @@ public class Matrix {
         }
         throw new NotCompatibleSizeException();
     }
+    public Matrix multiply(Matrix other) throws NotCompatibleSizeException{
+        if(this.isMultiplyableWith(other)){
+            Matrix output = new Matrix(new double[this.rowSize][other.colSize]);
+            for(int i = 0; i < output.rowSize; i++){
+                for(int j = 0; j < output.colSize; j++){
+                    for(int k = 0; k < other.rowSize; k++) {
+                        output.data[i][j] += this.data[i][k] * other.data[k][j];
+                    }
+                }
+            }
+            return output;
+        }
+        throw new NotCompatibleSizeException();
+    }
+    public Matrix multiply(double n){
+        Matrix output = new Matrix(new double[this.rowSize][this.colSize]);
+        for(int i = 0; i < output.rowSize; i++){
+            for(int j = 0; j < output.colSize; j++){
+                output.data[i][j] = this.data[i][j] * n;
+            }
+        }
+        return output;
+    }
     public boolean isAddableWith(Matrix other){
         return this.rowSize == other.rowSize && this.colSize == other.colSize;
     }
     public boolean isMultiplyableWith(Matrix other){
-        return this.rowSize == other.colSize;
+        return this.colSize == other.rowSize;
     }
     @Override
     public String toString() {
